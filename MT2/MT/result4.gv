@@ -1,0 +1,42 @@
+digraph res{0 [label = " E"]
+0->1;
+1 [label = " T"]
+1->2;
+2 [label = " X"]
+2->3;
+3 [label = " F"]
+3->4;
+4 [label = " alpha"]
+2->5;
+5 [label = " X'"]
+5->6;
+6 [label = " ε"]
+1->7;
+7 [label = " T'"]
+7->8;
+8 [label = " ε"]
+0->9;
+9 [label = " E'"]
+9->10;
+10 [label = " or"]
+9->11;
+11 [label = " T"]
+11->12;
+12 [label = " X"]
+12->13;
+13 [label = " F"]
+13->14;
+14 [label = " alpha"]
+12->15;
+15 [label = " X'"]
+15->16;
+16 [label = " ε"]
+11->17;
+17 [label = " T'"]
+17->18;
+18 [label = " ε"]
+9->19;
+19 [label = " E'"]
+19->20;
+20 [label = " ε"]
+}

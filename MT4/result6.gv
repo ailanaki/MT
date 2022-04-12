@@ -1,0 +1,40 @@
+digraph res{0 [label = " orXor"]
+0->1;
+1 [label = " unary"]
+1->2;
+2 [label = " alpha"]
+0->3;
+3 [label = " or"]
+0->4;
+4 [label = " unary"]
+4->5;
+5 [label = " ("]
+4->6;
+6 [label = " orXor"]
+6->7;
+7 [label = " unary"]
+7->8;
+8 [label = " alpha"]
+6->9;
+9 [label = " or"]
+6->10;
+10 [label = " and"]
+10->11;
+11 [label = " unary"]
+11->12;
+12 [label = " alpha"]
+10->13;
+13 [label = " and"]
+10->14;
+14 [label = " unary"]
+14->15;
+15 [label = " ("]
+14->16;
+16 [label = " unary"]
+16->17;
+17 [label = " alpha"]
+14->18;
+18 [label = " )"]
+4->19;
+19 [label = " )"]
+}

@@ -1,0 +1,9 @@
+Expr -> orXor
+orXor-> and orXor_
+orXor_-> OR and orXor_
+orXor_-> XOR and orXor_
+and -> unary and_
+and_ -> AND and_
+unary -> (orXor)
+unary -> "alpha"
+unary -> not unary

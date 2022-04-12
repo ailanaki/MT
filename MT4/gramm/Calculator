@@ -1,0 +1,53 @@
+expr
+
+expr returns [val : int]
+            = addSub {$val = addSub.val;}
+              END
+            ;
+
+addSub returns [val : int]
+            = mulDiv addSubP({mulDiv.val})
+              {$val = addSubP.val;}
+            ;
+addSubP(left : int) returns [val : int]
+             = ADD mulDiv    {int next = left + mulDiv.val;}
+               addSubP(next) {$val = addSubP.val;}
+             | SUB mulDiv    {int next = left - mulDiv.val;}
+               addSubP(next) {$val = addSubP.val;}
+             | {$val = left;}
+             ;
+mulDiv returns [val : int]
+            = log mulDivP({log.val})
+              {$val = mulDivP.val;}
+            ;
+mulDivP(left : int) returns [val : int]
+             = MUL log {int next = left * log.val;}
+               mulDivP(next) {$val = mulDivP.val;}
+             | DIV log {int next = left / log.val;}
+               mulDivP(next) {$val = mulDivP.val;}
+             | {$val = left;}
+             ;
+log returns [val : int]
+            = unary log_({unary.val}) {$val = log_.val;}
+            ;
+
+log_(left : int) returns [val : int]
+            = LOG log {$val = (int) (Math.log(left)/Math.log(log.val));}
+            | {$val = left;}
+            ;
+
+unary returns [val : int]
+            = SUB unary {$val = -unary.val;}
+            | LPAREN addSub RPAREN {$val = addSub.val;}
+            | NUM          {$val = Integer.valueOf(NUM);}
+            ;
+
+ADD = "+";
+SUB = "-";
+MUL = "*";
+LOG = "lg";
+DIV = "/";
+LPAREN = "(";
+RPAREN = ")";
+NUM : "([1-9][0-9]*)|(0)";
+END = "$";

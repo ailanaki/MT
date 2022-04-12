@@ -1,0 +1,44 @@
+expr
+
+expr returns [v : Tree]
+            = orXor {$v = orXor.v;}
+              END
+            ;
+
+orXor returns [v : Tree]
+            = and orXor_({and.v})
+              {$v = orXor_.v;}
+            ;
+
+orXor_(left : Tree) returns [v : Tree]
+            = OR and {Tree next = new Tree("orXor",  left,new Tree("or"), and.v);}
+              orXor_(next) {$v = orXor_.v;}
+            | XOR and {Tree next = new Tree("orXor", left,new Tree("xor"),  and.v);}
+              orXor_(next) {$v = orXor_.v;}
+            | {$v = left;}
+            ;
+
+and returns [v : Tree]
+            = unary and_({unary.v}) {$v = and_.v;}
+            ;
+
+and_(left : Tree) returns [v : Tree]
+            = AND unary and_({new Tree("and", left, new Tree("and"), unary.v)}){$v = and_.v;}
+            | {$v = left;}
+            ;
+
+
+unary returns [v : Tree]
+            = LPAREN orXor RPAREN {$v = new Tree("unary", new Tree("("), orXor.v, new Tree(")"));}
+            | ALPHA          {$v = new Tree("unary", new Tree("alpha"));}
+            | NOT unary {$v = new Tree("unary", new Tree("not"), unary.v);}
+            ;
+
+OR = "or";
+XOR = "xor";
+AND = "and";
+NOT = "not";
+LPAREN = "(";
+RPAREN = ")";
+ALPHA : "[a-z]";
+END = "$";

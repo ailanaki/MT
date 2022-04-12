@@ -1,0 +1,18 @@
+digraph res{0 [label = " unary"]
+0->1;
+1 [label = " not"]
+0->2;
+2 [label = " unary"]
+2->3;
+3 [label = " ("]
+2->4;
+4 [label = " unary"]
+4->5;
+5 [label = " not"]
+4->6;
+6 [label = " unary"]
+6->7;
+7 [label = " alpha"]
+2->8;
+8 [label = " )"]
+}

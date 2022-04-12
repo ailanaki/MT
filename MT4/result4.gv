@@ -1,0 +1,12 @@
+digraph res{0 [label = " orXor"]
+0->1;
+1 [label = " unary"]
+1->2;
+2 [label = " alpha"]
+0->3;
+3 [label = " xor"]
+0->4;
+4 [label = " unary"]
+4->5;
+5 [label = " alpha"]
+}
